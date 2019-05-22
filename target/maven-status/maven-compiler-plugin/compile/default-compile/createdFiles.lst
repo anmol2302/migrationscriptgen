@@ -1,8 +1,6 @@
 MigrationScriptGen.class
 QueryBuilder.class
-CassandraQueryManager.class
 LoggerFactory.class
-HttpClient$2.class
 CsvManager.class
 RequestParams.class
 HttpClient$1.class
