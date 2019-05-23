@@ -55,7 +55,7 @@ public class FileValidator {
             }
             return true;
         } catch (Exception e) {
-            logger.error("Exception Occured" + e.getMessage());
+            logger.error("FileValidator: isValidFile: exception occurred" + e.getMessage());
             return false;
         }
     }

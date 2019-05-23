@@ -11,7 +11,7 @@ public class QueryBuilder {
     }
 
     public String createUserUpdateQuery(Map<String, Object> userMap) {
-        String updateUserQuery = "UPDATE sunbird.user SET channel='" + requestParams.getChannel() + "',rootOrgId='" + requestParams.getChannel() + "'WHERE id='" + userMap.get("id") + "';";
+        String updateUserQuery = "UPDATE sunbird.user SET channel='" + requestParams.getChannel() + "',rootOrgId='" + requestParams.getRootOrgId() + "'WHERE  id='" + userMap.get("id") + "';";
         return updateUserQuery;
     }
 
@@ -20,7 +20,7 @@ public class QueryBuilder {
         List<Map<String, Object>> userOrgList = (List) map.get("organisations");
         List<String> queryList = new ArrayList<>();
         for (Map<String, Object> hm : userOrgList) {
-            String deleteUserQuery = "DELETE FROM sunbird.user_org Where id='" + hm.get("id") + "'";
+            String deleteUserQuery = "DELETE FROM sunbird.user_org Where id='" + hm.get("id") + "';";
             queryList.add(deleteUserQuery);
         }
         return queryList;
@@ -32,7 +32,7 @@ public class QueryBuilder {
         List<String> userOrgQueryList = new ArrayList<>();
 
         for (Map<String, Object> hm : userOrgList) {
-            String userOrgQuery = "INSERT INTO sunbird.user_org(id,hashtagid,isdeleted,organisationid,orgjoindate,roles,userid) VALUES ('" + hm.get("id") + "','" + hm.get("hashtagid") + "','" + hm.get("isdeleted") + "','" + hm.get("organisationid") + "','" + hm.get("orgjoindate") + "','" + hm.get("roles") + "','" + hm.get("userid") + "');";
+            String userOrgQuery = "INSERT INTO sunbird.user_org (id,hashtagid,isdeleted,organisationid,orgjoindate,roles,userid) VALUES ('" + hm.get("id") + "','" + hm.get("hashtagid") + "'," + hm.get("isdeleted") + ",'" + hm.get("organisationid") + "','" + hm.get("orgjoindate") + "','" + hm.get("roles") + "','" + hm.get("userid") + "');";
             userOrgQueryList.add(userOrgQuery);
         }
 

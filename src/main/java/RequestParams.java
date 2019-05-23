@@ -3,22 +3,25 @@ public class RequestParams {
     private String csvFileOutput;
     private String channel;
     private String rootOrgId;
-    private String orgName;
+
     private String apiKey;
     private String authToken;
     private String baseUrl;
+
+
+
     private RequestParams() {
     }
 
-    public RequestParams(String csvFileInput, String csvFileOutput, String channel, String rootOrgId, String orgName, String apiKey, String authToken,String baseUrl) {
+    public RequestParams(String csvFileInput, String csvFileOutput, String channel, String rootOrgId, String apiKey, String authToken, String baseUrl) {
         this.csvFileInput = csvFileInput;
         this.csvFileOutput = csvFileOutput;
         this.channel = channel;
         this.rootOrgId = rootOrgId;
-        this.orgName = orgName;
         this.apiKey = apiKey;
         this.authToken = authToken;
-        this.baseUrl=baseUrl;
+        this.baseUrl = baseUrl;
+
     }
 
     public String getCsvFileInput() {
@@ -53,14 +56,6 @@ public class RequestParams {
         this.rootOrgId = rootOrgId;
     }
 
-    public String getOrgName() {
-        return orgName;
-    }
-
-    public void setOrgName(String orgName) {
-        this.orgName = orgName;
-    }
-
     public String getApiKey() {
         return apiKey;
     }
@@ -84,4 +79,7 @@ public class RequestParams {
     public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
     }
+
+
+
 }

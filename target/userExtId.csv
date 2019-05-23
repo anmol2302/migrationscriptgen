@@ -1,3 +1,6 @@
 userName,userId,treasuryId,channel
-a901,a140c36d-dfb3-445b-934f-eeb3f9f171f7,333333,channel_01
-a901,a140c36d-dfb3-445b-934f-eeb3f9f171f7,333333,channel_01
+run1,311b589e-49bf-4c83-8df5-9847d69c9a49,tu1,channel_01
+run2,1459a9ab-9c13-4962-9794-7b0f950d3801,tu2,channel_01
+run3,61871c4e-12b7-4098-9ee7-3b7b5bbe92d9,tu3,channel_01
+run5,a1e9d300-9051-47a4-9441-496659384c4a,tu5,channel_01
+run7,8e731e39-2be2-4d4c-a5f8-4a330112ccf9,ext08,channel_01

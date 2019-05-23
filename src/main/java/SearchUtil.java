@@ -20,13 +20,15 @@ public class SearchUtil {
 
     public Map<String,Object>  userSearch(String userName) throws IOException {
 
+        try{
         Map<String, Object> userRequest = new HashMap<String, Object>();
         Map<String, Object> request = new HashMap<String, Object>();
         Map<String, String> filters = new HashMap<String, String>();
         filters.put("userName",userName);
+        filters.put("channel",params.getChannel());
         request.put("filters", filters);
         userRequest.put("request", request);
-        String searchUrl = params.getBaseUrl()+"/user/v1/search";
+        String searchUrl = params.getBaseUrl()+"/v1/user/search";
         Map<String,Object>resMap= client.post(userRequest, searchUrl);
         Map<String, Object> result = null;
         Map<String, Object> responseMap = null;
@@ -40,7 +42,7 @@ public class SearchUtil {
         if (null != responseMap) {
             content = (List<Map<String, Object>>) (responseMap).get("content");
         }
-        if (null != content) {
+        if (null != content && content.size()!=0) {
             return  content.get(0);
             }
         else{
@@ -48,38 +50,52 @@ public class SearchUtil {
         }
         return Collections.emptyMap();
     }
+    catch (Exception e){
+        System.out.println("Exception occurred in userSearch "+ e);
+    }
+        return Collections.emptyMap();
+    }
 
     public Map<String,Object> orgSearch(String orgExtId,String channel) throws IOException {
 
-        Map<String, Object> userRequest = new HashMap<String, Object>();
-        Map<String, Object> request = new HashMap<String, Object>();
-        Map<String, String> filters = new HashMap<String, String>();
-        filters.put("channel",channel);
-        filters.put("externalId",orgExtId);
-        request.put("filters", filters);
-        userRequest.put("request", request);
-        String searchUrl = params.getBaseUrl()+"/org/v1/search";
-        Map<String,Object>resMap= client.post(userRequest, searchUrl);
-        Map<String, Object> result = null;
-        Map<String, Object> responseMap = null;
-        List<Map<String, Object>> content = null;
-        if (null != resMap) {
-            result = (Map<String, Object>) resMap.get("result");
+        try {
+            Map<String, Object> userRequest = new HashMap<String, Object>();
+            Map<String, Object> request = new HashMap<String, Object>();
+            Map<String, String> filters = new HashMap<String, String>();
+            filters.put("channel", channel);
+            filters.put("externalId", orgExtId);
+            request.put("filters", filters);
+            userRequest.put("request", request);
+            String searchUrl = params.getBaseUrl() + "/v1/org/search";
+            Map<String, Object> resMap = client.post(userRequest, searchUrl);
+            Map<String, Object> result = null;
+            Map<String, Object> responseMap = null;
+            List<Map<String, Object>> content = null;
+            if (null != resMap) {
+                result = (Map<String, Object>) resMap.get("result");
+            }
+            if (null != result) {
+                responseMap = (Map<String, Object>) result.get("response");
+            }
+            if (null != responseMap && responseMap.size() != 0 && responseMap.get("content") != null) {
+                content = (List<Map<String, Object>>) (responseMap).get("content");
+            }
+            if (null != content && content.size() != 0) {
+                return content.get(0);
+            } else {
+                Collections.emptyMap();
+            }
+            return Collections.emptyMap();
         }
-        if (null != result) {
-            responseMap = (Map<String, Object>) result.get("response");
-        }
-        if (null != responseMap) {
-            content = (List<Map<String, Object>>) (responseMap).get("content");
-        }
-        if (null != content) {
-            return  content.get(0);
-        }
-        else{
-            Collections.emptyMap();
+        catch (Exception e){
+            System.out.println("SearchUtil: orgSearch: Exception occurred in orgSearch "+ e);
+
         }
         return Collections.emptyMap();
     }
+
+//
+
 
 
 }
