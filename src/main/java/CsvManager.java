@@ -44,7 +44,7 @@ public class CsvManager {
                                     processQueryWriteToFile(values[0], values[1], "");
                                 }
                             } else {
-                                logger.info("No treasuryId found for this " + values[0]);
+                                logger.error("CsvManager: processCsv: No treasuryId found for this userName :  " + values[0]+ " Skipping the record");
                                 continue;
                             }
 
@@ -69,7 +69,7 @@ public class CsvManager {
                 }
             }
         } else {
-            logger.info("please provide valid file paths");
+            logger.error("please provide valid file paths");
         }
     }
 
@@ -78,7 +78,7 @@ public class CsvManager {
             fw.write(query + "\n");
             logger.info("Query written to file " + query);
         } catch (IOException e) {
-            logger.error("Error occured while writing query to file " + e.getMessage());
+            logger.error("Error occurred while writing query to file " + e.getMessage());
         }
     }
 
@@ -148,7 +148,7 @@ public class CsvManager {
             }
 
         } else {
-            logger.error("Record not processed with this " + username + " and schoolID " + schoolId);
+            logger.error("Record not processed with this " + username + " and schoolID " + schoolId +" since "+ userOrgMap.get("failedReason"));
         }
     }
 
@@ -180,7 +180,7 @@ public class CsvManager {
                 userOrgList.add(userSubOrgReques);
 
             } else {
-            logger.error("CsvManager: createUserOrgRequest: No organisations found for this schooId : " + schoolId);
+            logger.error("CsvManager: createUserOrgRequest: No organisations found for this userId: "+userId+" and schoolId : " + schoolId+"  since no schoolId is present or rootOrgId is same as provided so Creating only root organisation");
         }
         return userOrgList;
     }
@@ -211,12 +211,14 @@ public class CsvManager {
         Map<String, Object> userOrgMap = new HashMap<>();
         userOrgMap.put("userMap", userMap);
         userOrgMap.put("orgMap", orgMap);
+        userOrgMap.put("failedReason","");
         if (userMap.size() != 0) {
             if (StringUtils.isNotBlank(schoolId)) {
                 if (orgMap.size() != 0) {
                     flag = true;           // schoolId is valid
                 } else {
-                    flag = false;         //schoolId is invalid
+                    flag = false;   //schoolId is invalid
+                    userOrgMap.put("failedReason","schoolId is invalid no org found");
                 }
             } else {
                 flag = true;         //schoolId is not provided associating userTo root org.
@@ -225,6 +227,7 @@ public class CsvManager {
 
         } else {
             flag = false;        //userName is invalid
+            userOrgMap.put("failedReason","userName is invalid");
 
         }
         userOrgMap.put("queryToBeProcessed",flag);
