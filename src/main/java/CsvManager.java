@@ -178,9 +178,8 @@ public class CsvManager {
                 userSubOrgReques.put("orgjoindate", getDateFormatter().format(new Date()));
                 userSubOrgReques.put("userid", userId);
                 userOrgList.add(userSubOrgReques);
-
             } else {
-            logger.error("CsvManager: createUserOrgRequest: No organisations found for this userId: "+userId+" and schoolId : " + schoolId+"  since no schoolId is present or rootOrgId is same as provided so Creating only root organisation");
+            logger.error("CsvManager: createUserOrgRequest: No organisations found for this userId: "+userId+" and schoolId : " + schoolId+"  since no schoolId is present or rootOrgId in orgMap is  (   "+Collections.singletonList(orgMap.toString())+"  ) is same as provided so Creating only root organisation");
         }
         return userOrgList;
     }

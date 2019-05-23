@@ -1,0 +1,2 @@
+2019-05-23 14:53:29 ERROR MigrationScriptGen:47 - CsvManager: processCsv: No treasuryId found for this userName :  run4 Skipping the record
+2019-05-23 14:53:29 ERROR MigrationScriptGen:183 - CsvManager: createUserOrgRequest: No organisations found for this userId: a1e9d300-9051-47a4-9441-496659384c4a and schoolId :   since no schoolId is present or rootOrgId in orgMap is  (   [{}]  ) is same as provided so Creating only root organisation

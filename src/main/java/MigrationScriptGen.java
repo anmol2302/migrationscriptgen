@@ -10,7 +10,7 @@ public class MigrationScriptGen {
     public static void main(String[] args) throws Exception {
         if(args.length==7) {
             String csvFileInput = args[0] != null ? args[0] : "";
-            String csvFileOutput = args[1] != null ? args[1] : "";
+            String cqlFileOutput = args[1] != null ? args[1] : "";
             String channel = args[2] != null ? args[2] : "";
             String rootOrgId = args[3] != null ? args[3] : "";
             String apiKey = args[4] != null ? args[4] : "";
@@ -18,12 +18,12 @@ public class MigrationScriptGen {
             String baseUrl = args[6] != null ? args[6] : "";
             checkValidiInputParams(args);
             logger.info("MigrationScriptGen:main:all provided params verified");
-            inputParams = new RequestParams(csvFileInput, csvFileOutput, channel, rootOrgId, apiKey, authToken, baseUrl);
+            inputParams = new RequestParams(csvFileInput, cqlFileOutput, channel, rootOrgId, apiKey, authToken, baseUrl);
             CsvManager manager = new CsvManager(inputParams);
             manager.processCsv();
         }
         else{
-            logger.error("Please provide all 9 params csvFileInput,csvFileOutput, channel, rootOrgId, apiKey, authToken, baseUrl,realm,clientId,grantType");
+            logger.error("Please provide all 9 params csvFileInput,cqlFileOutput, channel, rootOrgId, apiKey, authToken, baseUrl");
         }
     }
 
@@ -38,7 +38,7 @@ public class MigrationScriptGen {
 
     public static void checkValidiInputParams(String[] paramsArray) throws Exception {
 
-        String[] pramsNameArray = {"csvFileInput", "csvFileOutput", "channel", "rootOrgId", "apiKey", "authToken", "baseUrl"};
+        String[] pramsNameArray = {"csvFileInput", "cqlFileOutput", "channel", "rootOrgId", "apiKey", "authToken", "baseUrl"};
         for (int i = 0; i < paramsArray.length; i++) {
             if (!isValidParams(paramsArray[i])) {
                 throw new Exception("please provide valid value for params " + pramsNameArray[i]);
