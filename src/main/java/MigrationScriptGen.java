@@ -23,7 +23,7 @@ public class MigrationScriptGen {
             manager.processCsv();
         }
         else{
-            logger.error("Please provide all 9 params csvFileInput,cqlFileOutput, channel, rootOrgId, apiKey, authToken, baseUrl");
+            logger.error("Please provide all 7 params csvFileInput,cqlFileOutput, channel, rootOrgId, apiKey, authToken, baseUrl");
         }
     }
 

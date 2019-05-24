@@ -25,7 +25,7 @@ public class SearchUtil {
         Map<String, Object> request = new HashMap<String, Object>();
         Map<String, String> filters = new HashMap<String, String>();
         filters.put("userName",userName);
-        filters.put("channel",params.getChannel());
+//        filters.put("channel",params.getChannel());
         request.put("filters", filters);
         userRequest.put("request", request);
         String searchUrl = params.getBaseUrl()+"/v1/user/search";

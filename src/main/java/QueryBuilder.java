@@ -32,7 +32,7 @@ public class QueryBuilder {
         List<String> userOrgQueryList = new ArrayList<>();
 
         for (Map<String, Object> hm : userOrgList) {
-            String userOrgQuery = "INSERT INTO sunbird.user_org (id,hashtagid,isdeleted,organisationid,orgjoindate,roles,userid) VALUES ('" + hm.get("id") + "','" + hm.get("hashtagid") + "'," + hm.get("isdeleted") + ",'" + hm.get("organisationid") + "','" + hm.get("orgjoindate") + "','" + hm.get("roles") + "','" + hm.get("userid") + "');";
+            String userOrgQuery = "INSERT INTO sunbird.user_org (id,hashtagid,isdeleted,organisationid,orgjoindate,roles,userid) VALUES ('" + hm.get("id") + "','" + hm.get("hashtagid") + "'," + hm.get("isdeleted") + ",'" + hm.get("organisationid") + "','" + hm.get("orgjoindate") + "'," + "['PUBLIC']" + ",'" + hm.get("userid") + "');";
             userOrgQueryList.add(userOrgQuery);
         }
 
