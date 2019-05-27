@@ -26,10 +26,11 @@ public class CsvManager {
         fwCsv.write("userName,userId,treasuryId,channel\n");
     }
 
-    public void processCsv() throws IOException {
+    public void processCsv() throws Exception {
         fw = new FileWriter(requestParams.getCsvFileOutput());
         String line = "";
         String cvsSplitBy = ",";
+        validateInputRootOrgId(requestParams.getChannel(),requestParams.getRootOrgId());
         if (FileValidator.isValidFile(requestParams.getCsvFileInput(), requestParams.getCsvFileOutput())) {
             try {
                 br = getReaderObject(requestParams.getCsvFileInput());
@@ -246,6 +247,18 @@ public class CsvManager {
         catch (Exception e){
             logger.error("Exception occured while writing to write in  userExtId.csv");
         }
+    }
+
+
+    public void validateInputRootOrgId(String channel,String rootOrgId) throws Exception {
+
+        Map<String,Object> orgMap=searchUtil.validateRootOrgId(rootOrgId,channel);
+        if(orgMap.size()==0){
+            throw  new Exception(" Please provide valid channel and rootOrgId");
+        }
+
+
+
     }
 
 }
